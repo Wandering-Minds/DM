@@ -10,13 +10,13 @@ int l=0;      //Variable for result size.
 char G='y';
 int h;
 int choice;
-
+char set_count='A';
 
 class Sets {
 private:
 	long int Arr[50];  //Array for the set.
 	int  sel;     	 //set eliment size.
-public:
+public: 
 	void show_Menu();
 	void execute_sets(Sets,Sets);
 	void sets_union(Sets,Sets);
@@ -55,7 +55,7 @@ void Sets::execute_sets(Sets A, Sets B)
 
 		case 2:
 		{
-			cout << "\t\tIntersection set:\n\n\t\t{ ";
+			cout << "\t\tIntersection set:\n\n\t\t ";
 			sets_intersection(A,B);
 		}
 		break;
@@ -268,23 +268,30 @@ void Sets::get_set_elements()
 	srand(time(NULL));                        //  using the time seed from srand explanation
 	cout << "Select the Input Method.\n1. Enter Elements Yourself\n2. Use Random Numbers." << endl;
 	cin >> choice;
-	cout << "Please enter number of elements of your set: ";    //Getting input for  sets element size.
+	cout << "Please enter number of elements For Set "<<set_count<<" : ";    //Getting input for  sets element size.
 	cin >> sel;                                                   //Storing size in variable.
 	cout << endl;                                               //getting new line
-	for (i = 0;i<sel;i++)                                         //loop for get input elements for  set.
-	{
-		if (choice == 1)
-		{
-			cout << "Please enter Set Elements: { ";
-			cin >> Arr[i] >> dummy;
-		}             
-		else 
-			Arr[i] = (rand() % 100) + i;
-		
-	}
-	cout << " }" << endl;
 	
-	cout << "Elements of the set = { ";
+	if (choice == 1)
+	{
+		cout << "Please enter Set Elements For Set "<<set_count<<":  ";
+		for (i = 0;i < sel;i++)                                         //loop for get input elements for  set.
+		{
+			cin >> Arr[i];
+			if(i<sel-1)
+				cin>>dummy;
+		}
+	}
+	
+	else
+	{
+		for (i = 0;i < sel;i++)                                         //loop for get input elements for  set.
+		{
+			Arr[i] = (rand() % 100) + i;
+		}
+	}
+
+	cout << "Elements of the Set " << set_count <<" : { ";
 	for (i = 0;i<sel;i++) 	                                  //loop for showing elements of the set.
 	{
 		cout << Arr[i];
@@ -295,6 +302,7 @@ void Sets::get_set_elements()
 	}
 	cout << " }";
 	cout << "\n\n";
+	++set_count;
 }
 
 
