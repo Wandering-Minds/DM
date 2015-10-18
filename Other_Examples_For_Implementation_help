@@ -1,0 +1,112 @@
+#include <iostream>
+#define MAX 1024
+using namespace std;
+typedef int data;
+data A[] = { 1, 1, 2, 2, 2, 3, 3, 4, 9, 10, 100 };
+data B[] = { 1, 2, 2, 3, 3, 9, 10, 100 };
+void Intersection();
+void Union();
+void Relative_Complement();
+void Symmetric_Difference();
+int main() {
+	//cout << lenA << lenB;
+	Union();
+	//Intersection();
+	//Symmetric_Difference();
+	//Relative_Complement();
+	return 0;
+}
+void Union() {
+	int lenA = sizeof(A) / sizeof(A[0]);
+	int lenB = sizeof(B) / sizeof(B[0]);
+
+	int i = 0, j = 0;
+	while (i <= lenA && j <= lenB) {
+		if (i <= lenA - 1 || j <= lenB - 1) {
+			if (A[i] == B[j]) {
+				if (i < lenA) {
+					cout << A[i++] << " ";
+					if (j < lenB)
+						j++;
+				} else if (j < lenB)
+					cout << B[j++] << " ";
+			} else {
+				if (A[i] < B[j]) {
+					if (i < lenA) {
+						cout << A[i++] << " ";
+					} else
+						cout << B[j++] << " ";
+				} else {
+					if (j < lenB)
+						cout << B[j++] << " ";
+					else
+						cout << A[i++] << " ";
+				}
+			}
+		} else
+			break;
+	}
+}
+
+void Intersection() {
+
+	int lenA = sizeof(A) / sizeof(A[0]);
+	int lenB = sizeof(B) / sizeof(B[0]);
+
+	int i = 0, j = 0;
+	while (i < lenA && j < lenB) {
+		if (A[i] == B[j]) {
+			cout << A[i] << " ";
+			i++;
+			j++;
+
+		} else {
+			if (A[i] > B[j])
+				j++;
+
+			else
+				i++;
+
+		}
+
+	}
+
+}
+void Relative_Complement() {
+
+}
+void Symmetric_Difference() {
+
+	int lenA = sizeof(A) / sizeof(A[0]);
+	int lenB = sizeof(B) / sizeof(B[0]);
+
+	int i = 0, j = 0;
+	while (i <= lenA && j <= lenB) {
+		if (i <= lenA - 1 || j <= lenB - 1) {
+			if (A[i] == B[j]) {
+				if (i < lenA) {
+					i++;
+					//cout << A[i++] << " ";
+					if (j < lenB)
+						j++;
+				} else if (j < lenB)
+					j++;
+				//cout << B[j++] << " ";
+			} else {
+				if (A[i] < B[j]) {
+					if (i < lenA) {
+						cout << A[i++] << " ";
+					} else
+						cout << B[j++] << " ";
+				} else {
+					if (j < lenB)
+						cout << B[j++] << " ";
+					else
+						cout << A[i++] << " ";
+				}
+			}
+		} else
+			break;
+	}
+
+}
