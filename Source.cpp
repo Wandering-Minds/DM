@@ -295,10 +295,10 @@ void Sets::get_set_elements()
 
 
 void main()
-{
-	Sets S1,S2,S3;
-	S1.get_set_elements();
-	S2.get_set_elements();
-	S3.execute_sets(S1,S2);
+{                               
+	Sets S1,S2,S3;                   //Create three objects of sets class 
+	S1.get_set_elements();           //get elements in obj s1
+	S2.get_set_elements();           //get elements in obj s2
+	S3.execute_sets(S1,S2);          //the result of union/intersection/differnce would be stored in Arr[] of obj 3....Reason to call exexute_sets() on obj3 and passing S1 and S2 as arguments
 	system("pause");
 }
