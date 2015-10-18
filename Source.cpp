@@ -1,5 +1,4 @@
 //Assignment For Discrete Maths
-
 #include<iostream>
 #include<time.h>
 using namespace std;
@@ -10,6 +9,7 @@ int j;      //Loop index variable.
 int l=0;      //Variable for result size.
 char G='y';
 int h;
+int choice;
 
 
 class Sets {
@@ -42,7 +42,8 @@ void Sets::show_Menu()
 void Sets::execute_sets(Sets A, Sets B)
 {
 	cout << "Welcome To Sets Program" << endl;
-	
+	cout << "Select the Input Method.\n1. Enter Elements Yourself\nUse Random Numbers."<<endl;
+	cin >> choice;
 	while (G == 'y')
 	{
 		show_Menu();
@@ -266,15 +267,23 @@ void Sets::power_sets(Sets A, Sets B)
 void Sets::get_set_elements()
 {
 	char dummy;
+	srand(time(NULL));                                          //  using the time seed from srand explanation 
 	cout << "Please enter number of elements of your set: ";    //Getting input for  sets element size.
 	cin >> sel;                                                   //Storing size in variable.
 	cout << endl;                                               //getting new line
 	//cout << "Please enter Set Elements:\n{ ";
 	for (i = 0;i<sel;i++)                                         //loop for get input elements for  set.
 	{
-		srand(time(NULL));                                     //  using the time seed from srand explanation 
-		Arr[i] = (rand() % 100)+ i;
-		//cin >> A[i] >> dummy;
+		if (choice == 1)
+		{
+			cin >> Arr[i] >> dummy;
+		}             
+		else
+		{
+			Arr[i] = (rand() % 100) + i;
+		}
+	
+		
 	}
 	cout << " }" << endl;
 	
