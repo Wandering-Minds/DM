@@ -68,7 +68,7 @@ void Sets::execute_sets(Sets A, Sets B)
 
 		case 4:
 		{
-			cout << "\t\tCartesian product: \n\n\t\t{ ";
+			cout << "\t\tCartesian product: \n\n\t\t ";
 			Curtatian_products(A,B);
 		}
 		break;
