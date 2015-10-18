@@ -42,8 +42,6 @@ void Sets::show_Menu()
 void Sets::execute_sets(Sets A, Sets B)
 {
 	cout << "Welcome To Sets Program" << endl;
-	cout << "Select the Input Method.\n1. Enter Elements Yourself\nUse Random Numbers."<<endl;
-	cin >> choice;
 	while (G == 'y')
 	{
 		show_Menu();
@@ -267,7 +265,9 @@ void Sets::power_sets(Sets A, Sets B)
 void Sets::get_set_elements()
 {
 	char dummy;
-	srand(time(NULL));                                          //  using the time seed from srand explanation 
+	srand(time(NULL));                        //  using the time seed from srand explanation
+	cout << "Select the Input Method.\n1. Enter Elements Yourself\nUse Random Numbers." << endl;
+	cin >> choice;
 	cout << "Please enter number of elements of your set: ";    //Getting input for  sets element size.
 	cin >> sel;                                                   //Storing size in variable.
 	cout << endl;                                               //getting new line
