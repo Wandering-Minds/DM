@@ -22,7 +22,7 @@ void Union() {
 
 	int i = 0, j = 0;
 	while (i <= lenA && j <= lenB) {
-		if (i <= lenA - 1 || j <= lenB - 1) {
+		if (i <= lenA - 1 || j <= lenB - 1) { 
 			if (A[i] == B[j]) {
 				if (i < lenA) {
 					cout << A[i++] << " ";
