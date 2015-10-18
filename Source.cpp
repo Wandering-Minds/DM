@@ -271,17 +271,15 @@ void Sets::get_set_elements()
 	cout << "Please enter number of elements of your set: ";    //Getting input for  sets element size.
 	cin >> sel;                                                   //Storing size in variable.
 	cout << endl;                                               //getting new line
-	cout << "Please enter Set Elements:\n{ ";
 	for (i = 0;i<sel;i++)                                         //loop for get input elements for  set.
 	{
 		if (choice == 1)
 		{
+			cout << "Please enter Set Elements: { ";
 			cin >> Arr[i] >> dummy;
 		}             
-		else
-		{
+		else 
 			Arr[i] = (rand() % 100) + i;
-		}
 		
 	}
 	cout << " }" << endl;
