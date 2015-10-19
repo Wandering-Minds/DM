@@ -1,0 +1,15 @@
+Make a class "Employee" which have properties of 
+* ID          (int) 
+* Name         (string)
+* Designation  (string)
+* Salary       (double)
+* Bonus        (double)
+
+This class should be able to have Fnctions to display 
+name of the Employee and total salary by adding salary 
+and bonus.
+
+Make another class "EmployeeTest" which have main function to test the Employee class 
+(Not Necessary To Make Another Class) 
+
+This Statment Was Meant For C#/JAVA....So Just Create a void main()
