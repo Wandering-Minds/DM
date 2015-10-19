@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 #include<iostream>
 #include<string>
 using namespace std;
 
+=======
+#include <iostream>            //Assignment For Discrete Maths
+# include <time.h>
+using namespace std;
+
+int i;      //Loop index variable.
+int j;      //Loop index variable.
+int l=0;      //Variable for result size.
+char G='y';
+int h;
+>>>>>>> origin/master
 int choice;
 
 class Employee {
@@ -19,7 +31,11 @@ public:
 	void PrintDetails();
 };
 
+<<<<<<< HEAD
 void Employee::GetEmpDetails()
+=======
+void Sets::show_Menu()  // show menu 
+>>>>>>> origin/master
 {
 	cout << "\t\t###### ENTER EMPLOYEE DETAILS ######\n\n" << endl;
 	cout << "Enter Your Name: ";
