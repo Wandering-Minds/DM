@@ -27,7 +27,7 @@ public:
 	void Curtatian_products(Sets,Sets);
 };
 
-void Sets::show_Menu()
+void Sets::show_Menu()  // show menu 
 {
 	cout << "Please enter 1 for Union set \n";
 	cout << "Please enter 2 for Intersection set \n";
