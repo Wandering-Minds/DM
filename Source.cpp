@@ -11,7 +11,7 @@ using namespace std;
 int i;      //Loop index variable.
 int j;      //Loop index variable.
 int l=0;      //Variable for result size.
-char G='y';
+char G='y'; //for control structure
 int h;
 >>>>>>> origin/master
 int choice;
