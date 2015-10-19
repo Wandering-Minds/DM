@@ -1,8 +1,6 @@
-//Assignment For Discrete Maths
-#include<iostream>
-#include<time.h>
+#include <iostream>            //Assignment For Discrete Maths
+# include <time.h>
 using namespace std;
-
 
 int i;      //Loop index variable.
 int j;      //Loop index variable.
