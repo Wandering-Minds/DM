@@ -204,7 +204,7 @@ void Sets::sets_difference(Sets A,Sets B)
 		}
 
 	}
-	cout << "A Subtraction B = { ";
+	cout << "A Subtraction B = { ";    //A-B
 	for (i = 0; i<l; i++)
 	{
 		cout << Arr[i];
