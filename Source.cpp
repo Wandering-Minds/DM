@@ -14,7 +14,7 @@ char set_count = 'A';    //couts the set number
 class Sets {
 private:
 	long int Arr[50];    //Array for the set.
-	int  sel;     	    //set eliment size.
+	int  sel;     	    //set element size.
 public:
 	Sets()             //default constructor
 	{
@@ -27,27 +27,24 @@ public:
 	void show_Menu();
 	void execute_sets(Sets, Sets, Sets, Sets, Sets, Sets);
 	Sets sets_union(Sets, Sets);
-	Sets compound_union(Sets, Sets, Sets, Sets, Sets);              
+	Sets compound_union(Sets, Sets, Sets, Sets, Sets);
 	Sets sets_intersection(Sets, Sets);
 	Sets compound_intersection(Sets A, Sets B, Sets C);             //For 3 Arguments
 	Sets compound_intersection(Sets, Sets, Sets, Sets, Sets);       //For 3 Arguments
 	Sets sets_difference(Sets, Sets);
-	void get_set_elements();
-	void show_set_elements();
-	void Universal();
-	void Sort();
-	void show();
+	void get_set_elements(); //for inputting Set elements
+	void show_set_elements(); // to print set elements
+	void Universal(); //universal set
+	void Sort(); //to sort sets into ascending order
+	void show(); //to print result
 };
-
-
-
-
 void main()              //main function
 {
-	system("COLOR 3F");
+	system("COLOR 3F"); //background colour
 	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
-	cout << "\nYou May Have To Enter Elements For 5 Sets A,B,C,D,E in order to proceed\n";
+	cout << "\nYou May Have To Enter Elements For 5 Sets A,B,C,D,E in order to proceed\n";                 //input method selection
 	cout << "\nPlease Select the Input Method\n\n1. Enter Elements Yourself\n2. Use Random Numbers." << endl;
+	cout << "\nChoice: ";
 	cin >> choice;
 	cout << "---------------------------------------------------------------------------" << endl;
 	Sets S1, S2, S3, S4, S5, S6, S7;         //creating 7 objects of Sets Class
@@ -57,11 +54,11 @@ void main()              //main function
 	S4.get_set_elements();
 	S5.get_set_elements();
 	cout << "---------------------------------------------------------------------------" << endl;
-	S6.Universal();
+	S6.Universal(); //accessing universal set through object
 	system("cls");
 	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
 	cout << "---------------------------------------------------------------------------" << endl;
-	cout << "\n\t\tFollowing Are The Sets Used For Operations:\n\n";
+	cout << "\n\t\tFollowing Are The Sets Used For Operations:\n\n";                      //to show the sets that have been entered
 	cout << "---------------------------------------------------------------------------" << endl;
 	S1.show_set_elements();
 	cout << "---------------------------------------------------------------------------" << endl;
@@ -76,7 +73,7 @@ void main()              //main function
 	cout << "\t\t\t";
 	system("pause");
 	cout << "---------------------------------------------------------------------------" << endl;
-	system("cls");
+	system("cls");                                                                                  //clearing screen
 	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
 	S7.execute_sets(S1, S2, S3, S4, S5, S6);      //passing S1,S2,S3,S4,S5,S6  as arguments to Func Execute_Sets ....Further Process is implementation is done there
 	cout << "\t\t\t";
@@ -128,68 +125,74 @@ void Sets::execute_sets(Sets A, Sets B, Sets C, Sets D, Sets E, Sets U)         
 		show_Menu();
 		switch (h)
 		{
-		case 1:
+		case 1:    //performing union
 		{
 			R = sets_union(A, B);
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A U B :\t";
-			R.Sort();
-			R.show();;
+			cout << "A U B :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort();  // sorting of set to display elements in ascending order
+			R.show(); //printing the set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 2:
 		{
-			R = sets_intersection(A, B);
+			R = sets_intersection(A, B); //performing intersection 
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A N B :\t";
-			R.Sort();
-			R.show();;
+			cout << "A N B :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort(); //function call to sort set
+			R.show();//printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 3:
 		{
-			R = sets_difference(A, B);
+			R = sets_difference(A, B); //subtracting one set from the other (A-B)
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A - B :\t";
-			R.Sort();
-			R.show();;
+			cout << "A - B :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort(); //sorting to ascending order
+			R.show();//printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 4:
 		{
-			R = sets_difference(B, A);
+			R = sets_difference(B, A); //subtracting one set from the other (B-A)
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "B - A :\t";
-			R.Sort();
-			R.show();;
+			cout << "B - A :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort(); //sorting set
+			R.show();//print
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 5:
 		{
-			R = sets_difference(U, A);
+			R = sets_difference(U, A); //subtracting set from universal set (U-A)
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A' :\t";
-			R.Sort();
-			R.show();
+			cout << "A' :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort(); //sorting set
+			R.show();//print
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 6:
 		{
-			R = sets_difference(U, B);
+			R = sets_difference(U, B);//subtracting set from universal set (U-B)
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "B' :\t";
-			R.Sort();
-			R.show();
+			cout << "B' :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort();// sorting set
+			R.show();//print
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 
@@ -197,35 +200,38 @@ void Sets::execute_sets(Sets A, Sets B, Sets C, Sets D, Sets E, Sets U)         
 
 		case 7:
 		{
-			R = sets_union(A, B);
-			R2 = sets_intersection(R, C);
+			R = sets_union(A, B);// assigning set of union of A and B to R 
+			R2 = sets_intersection(R, C);// assigning set of intersection of R and C to R2
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 U A2 N A3 :\t";
-			R2.Sort();
-			R2.show();
+			cout << "A1 U A2 N A3 :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 8:
 		{
-			R = sets_intersection(A, B);
-			R2 = sets_union(R, C);
+			R = sets_intersection(A, B);// assigning set of intersection of A and B to result
+			R2 = sets_union(R, C);// assigning set of union of R and C to R2
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 N A2 U A3 :\t";
-			R2.Sort();
-			R2.show();
+			cout << "A1 N A2 U A3 :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 9:
 		{
-			R = compound_union(A, B, C, D, E);
+			R = compound_union(A, B, C, D, E); // result of union of 5 sets assigned to R
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 U A2 U A3 U A4 U A5 :\t";
-			R.Sort();
-			R.show();
+			cout << "A1 U A2 U A3 U A4 U A5 :\n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort();//sorting set
+			R.show();// printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 
 		}
@@ -233,94 +239,98 @@ void Sets::execute_sets(Sets A, Sets B, Sets C, Sets D, Sets E, Sets U)         
 
 		case 10:
 		{
-			R = compound_intersection(A, B, C, D, E);
+			R = compound_intersection(A, B, C, D, E);//// result of intersection of 5 sets assigned to R 
 			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 N A2 N A3 N A4 N A5 :\t";
-			R.Sort();
-			R.show();
+			cout << "A1 N A2 N A3 N A4 N A5 : \n";
+			cout << "---------------------------------------------------------------------------" << endl;
+			R.Sort();//sorting set
+			R.show();//printing result
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 		case 11:
 		{
-			R = sets_intersection(B, C);
-			R2 = sets_union(A, R);
+			R = sets_intersection(B, C); // result of intersection of B and C  assigned to R
+			R2 = sets_union(A, R); //result of union of A and R assigned to R2
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "A U (B N C): \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 		case 12:
 		{
-			R = sets_union(A, B);
-			R2 = sets_intersection(R, C);
+			R = sets_union(A, B); //result of union of A and B assigned to R
+			R2 = sets_intersection(R, C); //result of intersection of R and C assigned to R2
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "(A U B ) N C: \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 		case 13:
 		{
-			R = sets_union(B, C);
-			R2 = sets_intersection(A, R);
+			R = sets_union(B, C); //result of union of B and C assigned to R
+			R2 = sets_intersection(A, R); //result of intersection of R and A assigned to R2
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "A N (B U C): \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();// sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 		case 14:
 		{
-			R = sets_intersection(A, B);
-			R2 = sets_union(R, C);
+			R = sets_intersection(A, B);//result of intersection of A and B assigned to R
+			R2 = sets_union(R, C);//result of intersection of R and C assigned to R2
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "(A N B ) U C: \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 		case 15:
 		{
-			R = compound_intersection(A, B, C);
+			R = compound_intersection(A, B, C);//result for compound intersection of A, B and C assigned to R
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "A N (B N C): \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 		case 16:
 		{
-			R = sets_union(B, C);
-			R2 = sets_union(A, R);
+			R = sets_union(B, C); //result of union of B and C assigned to R
+			R2 = sets_union(A, R);//result of union of A and R assigned to R2
 			cout << "---------------------------------------------------------------------------" << endl;
 			cout << "A U (B U C): \n";
-			R2.Sort();
-			R2.show();
+			cout << "---------------------------------------------------------------------------" << endl;
+			R2.Sort();//sorting set
+			R2.show();//printing set
 			cout << "---------------------------------------------------------------------------" << endl;
 		}
 		break;
 
 
 		default:
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "You entered wrong key\n";
+			cout << "---------------------------------------------------------------------------" << endl; //check to ensure right option is entered
+			cout << "\aYou entered wrong key\n";
 			cout << "---------------------------------------------------------------------------" << endl;
 			break;
 		}
-		cout << "\n\n";
-		cout << "---------------------------------------------------------------------------" << endl;
-		cout << "Please enter 'y' for check again or 'n' for stop: " << endl;
+		cout << "\nPlease enter 'y' for check again or 'n' for stop: " << endl;                              //check to either perform another function or exit
 		cout << "---------------------------------------------------------------------------" << endl;
 		cin >> G;
-		cout << "---------------------------------------------------------------------------" << endl;
 	}
 
 }
@@ -403,17 +413,17 @@ Sets Sets::compound_intersection(Sets A, Sets B, Sets C)      //function to comp
 {
 	l = 0;
 	Sets temp;
-	for (i = 0; i<A.sel; i++)                     
+	for (i = 0; i<A.sel; i++)
 	{
-		for (j = 0; j < B.sel; j++)             
+		for (j = 0; j < B.sel; j++)
 		{
 			for (int k = 0; k < C.sel; k++)
 			{
-				if (A.Arr[i] == B.Arr[j] && B.Arr[j] == C.Arr[k])               
+				if (A.Arr[i] == B.Arr[j] && B.Arr[j] == C.Arr[k])
 				{
-					B.Arr[j] = 0;                       
-					temp.Arr[l] = A.Arr[i];                 
-					l++;                              
+					B.Arr[j] = 0;
+					temp.Arr[l] = A.Arr[i];
+					l++;
 				}
 
 			}
@@ -504,31 +514,37 @@ Sets Sets::sets_difference(Sets A, Sets B)          //compute difference
 
 void Sets::get_set_elements()                                                                //function to get Elements
 {
-	char dummy; 
+	char dummy;
 	srand(time(NULL));                                                                     //  using the time seed from srand explanation
 	cout << "Please enter number of elements For Set " << set_count << " : ";              //Getting input for  sets element size.
 	cin >> sel;                                                                            //Storing size in variable.
 
-
-	if (choice == 1)
+if(choice == 1)
 	{
-		cout << "Please enter Set Elements For Set " << set_count << ":  ";
-		for (i = 0;i < sel;i++)                                        
+		cout << "(Enter The Elements Of the Set seprated by Commas like this  1,2,3,4,5 ";
+		cout << "Please enter Set Elements For Set " << set_count << ": ";
+		for (i = 0;i < sel;i++)
 		{
 			cin >> Arr[i];
 			if (i<sel - 1)
 				cin >> dummy;
 
 		}
-		cout << endl;                                               
+		cout << endl;
 	}
 
-	else
+else if(choice==2)
 	{
-		for (i = 0;i < sel;i++)                                        
+		for (i = 0;i < sel;i++)
 		{
 			Arr[i] = (rand() % 10) + i;
 		}
+	}
+
+else
+	{
+		cout << "Invalid Choice!!...Try Again Plzz..\n";
+	    exit(0);
 	}
 	++set_count;
 }
