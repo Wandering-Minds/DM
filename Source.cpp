@@ -5,7 +5,7 @@ using namespace std;
 
 int i;      //Loop index variable.
 int j;      //Loop index variable.
-int l = 0;      //Variable for result size.
+int l;      //Variable for result size.
 char G = 'y';
 int h;
 int choice;
@@ -20,12 +20,24 @@ public:
 	void execute_sets(Sets, Sets);
 	Sets sets_union(Sets, Sets);
 	void show_union();
+	Sets compound_union(Sets,Sets,Sets,Sets,Sets);
 	void sets_intersection(Sets, Sets);
 	void sets_difference(Sets, Sets);
 	void get_set_elements();
 	void power_sets(Sets, Sets);
 	void Curtatian_products(Sets, Sets);
 };
+
+Sets Sets::compound_union(Sets A,Sets B, Sets C, Sets D, Sets E)
+{
+	Sets a,b,c,temp;
+
+	a=sets_union(A, B);
+	b = sets_union(C, D);
+	c = sets_union(a, b);
+	temp = sets_union(c, E);
+	return temp;
+}
 
 void Sets::show_Menu()
 {
@@ -44,6 +56,7 @@ void Sets::show_union()
 	cout << "A Union B : \n\n\t\t { ";
 	for (i = 0; i < l; i++)
 	{
+		
 		cout << Arr[i];
 		if (i <l - 1)
 		{
@@ -114,6 +127,7 @@ Sets Sets::sets_union(Sets A, Sets B)
 {
 	Sets temp;
 	//compute union
+	l = 0;
 	for (i = 0; i<A.sel; i++)
 	{
 		temp.Arr[i] = A.Arr[i];
@@ -136,6 +150,7 @@ Sets Sets::sets_union(Sets A, Sets B)
 			temp.Arr[l] = B.Arr[i];
 			l++;
 		}
+		temp.sel = l;
 	}
 	return temp;
 	
@@ -144,18 +159,19 @@ Sets Sets::sets_union(Sets A, Sets B)
 void Sets::sets_intersection(Sets A, Sets B)
 {
 	//compute intersection
-	for (i = 0; i<A.sel; i++)
+	for (i = 0; i<A.sel; i++)                     // loop runs from 0 to Number of elements in Set A
 	{
-		for (j = 0; j<B.sel; j++)
-		{
-			if (A.Arr[i] == B.Arr[j])
+		//for (j = 0; j<B.sel; j++)               //loop runs from 0 to Number of elements in Set B
+		//{
+			if (A.Arr[i] == B.Arr[i])               //if elements of Set A is Equal to that in Set B at ith location of Array 
 			{
-				B.Arr[j] = 0;
-				Arr[l] = A.Arr[i];
-				l++;
+				B.Arr[j] = 0;                       //then initialize ith location with 0
+				Arr[l] = A.Arr[i];                  //initilize the  element of array with resultant array with the value of ith elment of Set A's Aray
+				l++;                                //increment l so that the next element could be placed at next location in array
 			}
-		}
+		//}
 	}
+
 	cout << "A Intersection B = { ";
 	for (i = 0; i<l; i++)
 	{
@@ -321,9 +337,18 @@ void Sets::get_set_elements()
 
 void main()
 {
-	Sets S1, S2, S3;                   //Create three objects of sets class 
+	/*Sets S1, S2, S3;                   //Create three objects of sets class 
 	S1.get_set_elements();           //get elements in obj s1
 	S2.get_set_elements();           //get elements in obj s2
 	S3.execute_sets(S1, S2);          //the result of union/intersection/differnce would be stored in Arr[] of obj 3....Reason to call exexute_sets() on obj3 and passing S1 and S2 as arguments
+	*/
+	Sets A, B, C, D, E,F,R;
+	A.get_set_elements();
+	B.get_set_elements();
+	C.get_set_elements();
+	D.get_set_elements();
+	E.get_set_elements();
+	R=F.compound_union(A, B, C, D, E);
+	R.show_union();
 	system("pause");
 }
