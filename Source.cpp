@@ -18,7 +18,8 @@ private:
 public:
 	void show_Menu();
 	void execute_sets(Sets, Sets);
-	void sets_union(Sets, Sets);
+	Sets sets_union(Sets, Sets);
+	void show_union();
 	void sets_intersection(Sets, Sets);
 	void sets_difference(Sets, Sets);
 	void get_set_elements();
@@ -38,9 +39,26 @@ void Sets::show_Menu()
 	cin >> h;
 }
 
+void Sets::show_union()
+{
+	cout << "A Union B : \n\n\t\t { ";
+	for (i = 0; i < l; i++)
+	{
+		cout << Arr[i];
+		if (i <l - 1)
+		{
+			cout << " , ";
+		}
+	}
+	cout << "}" << endl;
+
+}
+
+
 void Sets::execute_sets(Sets A, Sets B)
 {
 	cout << "Welcome To Sets Program" << endl;
+	Sets R;
 	while (G == 'y')
 	{
 		show_Menu();
@@ -48,7 +66,8 @@ void Sets::execute_sets(Sets A, Sets B)
 		{
 		case 1:
 		{
-			sets_union(A, B);
+			R=sets_union(A, B);
+			R.show_union();
 		}
 		break;
 
@@ -91,12 +110,13 @@ void Sets::execute_sets(Sets A, Sets B)
 
 }
 
-void Sets::sets_union(Sets A, Sets B)
+Sets Sets::sets_union(Sets A, Sets B)
 {
+	Sets temp;
 	//compute union
 	for (i = 0; i<A.sel; i++)
 	{
-		Arr[i] = A.Arr[i];
+		temp.Arr[i] = A.Arr[i];
 		l++;
 	}
 	int e = l;
@@ -105,7 +125,7 @@ void Sets::sets_union(Sets A, Sets B)
 		int found = 0;
 		for (int j = 0; j<e; j++)
 		{
-			if (B.Arr[i] == Arr[j])
+			if (B.Arr[i] == temp.Arr[j])
 			{
 				found = 1;
 				break;
@@ -113,20 +133,12 @@ void Sets::sets_union(Sets A, Sets B)
 		}
 		if (found == 0)
 		{
-			Arr[l] = B.Arr[i];
+			temp.Arr[l] = B.Arr[i];
 			l++;
 		}
 	}
-	cout << "A Union B : \n\n\t\t { ";
-	for (i = 0; i < l; i++)
-	{
-		cout << Arr[i];
-		if (i <l - 1)
-		{
-			cout << " , ";
-		}
-	}
-	cout << "}" << endl;
+	return temp;
+	
 }
 
 void Sets::sets_intersection(Sets A, Sets B)
