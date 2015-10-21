@@ -1,5 +1,13 @@
+/*
+Assignment No # 1
+DISCRETE MATHS
+SUBMITTED TO: DR. ASIM QURESHI
+SUBMITTED BY: HUSSAIN ALI KHAN
+ENROLLMENT: 03-134142-034
+*/
+
 #include<iostream>
-#include<time.h>
+#include<time.h>          //For Srand (Time Seed)
 using namespace std;
 
 
@@ -24,14 +32,14 @@ public:
 
 	//Function Declarations
 
-	void show_Menu();
-	void execute_sets(Sets, Sets, Sets, Sets, Sets, Sets);
-	Sets sets_union(Sets, Sets);
-	Sets compound_union(Sets, Sets, Sets, Sets, Sets);
-	Sets sets_intersection(Sets, Sets);
-	Sets compound_intersection(Sets A, Sets B, Sets C);             //For 3 Arguments
-	Sets compound_intersection(Sets, Sets, Sets, Sets, Sets);       //For 3 Arguments
-	Sets sets_difference(Sets, Sets);
+	void show_Menu(); //shows mwnu
+	void execute_sets(Sets, Sets, Sets, Sets, Sets, Sets);   //for implementation
+	Sets sets_union(Sets, Sets);                             //compute union
+	Sets compound_union(Sets, Sets, Sets, Sets, Sets);       //compund union for 5 sets
+	Sets sets_intersection(Sets, Sets);                      //compute intersection
+	Sets compound_intersection(Sets A, Sets B, Sets C);             //compound intersection For 3 Arguments
+	Sets compound_intersection(Sets, Sets, Sets, Sets, Sets);       //compound intersection For 5 Arguments
+	Sets sets_difference(Sets, Sets);                          //compute differnce between two sets
 	void get_set_elements(); //for inputting Set elements
 	void show_set_elements(); // to print set elements
 	void Universal(); //universal set
@@ -514,12 +522,12 @@ Sets Sets::sets_difference(Sets A, Sets B)          //compute difference
 
 void Sets::get_set_elements()                                                                //function to get Elements
 {
-	char dummy;
+	char dummy;                        //for storing commas entered during input
 	srand(time(NULL));                                                                     //  using the time seed from srand explanation
 	cout << "Please enter number of elements For Set " << set_count << " : ";              //Getting input for  sets element size.
 	cin >> sel;                                                                            //Storing size in variable.
 
-if(choice == 1)
+	if (choice == 1)
 	{
 		cout << "(Enter The Elements Of the Set seprated by Commas like this  1,2,3,4,5 ";
 		cout << "Please enter Set Elements For Set " << set_count << ": ";
@@ -533,18 +541,18 @@ if(choice == 1)
 		cout << endl;
 	}
 
-else if(choice==2)
+	else if (choice == 2)
 	{
 		for (i = 0;i < sel;i++)
 		{
-			Arr[i] = (rand() % 10) + i;
+			Arr[i] = (rand() % 10 + i);
 		}
 	}
 
-else
+	else
 	{
 		cout << "Invalid Choice!!...Try Again Plzz..\n";
-	    exit(0);
+		exit(0);
 	}
 	++set_count;
 }
