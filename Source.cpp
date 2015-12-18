@@ -1,624 +1,439 @@
-/*
-Assignment No # 1
-DISCRETE MATHS
-SUBMITTED TO: DR. ASIM QURESHI
-SUBMITTED BY: HUSSAIN ALI KHAN
-ENROLLMENT: 03-134142-034
-*/
-
 #include<iostream>
-#include<time.h>          //For Srand (Time Seed)
+#include<Windows.h>
+
 using namespace std;
 
-
-int i;           //Loop index variable.
-int j;           //Loop index variable.
-int l;           //Variable for result size.
-char G = 'y';    //for while loop to remain true
-int h;           //switch to menu
-int choice;      //choice for random number or enter elements
-char set_count = 'A';    //couts the set number
-
-class Sets {
-private:
-	long int Arr[50];    //Array for the set.
-	int  sel;     	    //set element size.
-public:
-	Sets()             //default constructor
-	{
-		Arr[50] = 0;
-		sel = 0;
-	}
-
-	//Function Declarations
-
-	void show_Menu(); //shows mwnu
-	void execute_sets(Sets, Sets, Sets, Sets, Sets, Sets);   //for implementation
-	Sets sets_union(Sets, Sets);                             //compute union
-	Sets compound_union(Sets, Sets, Sets, Sets, Sets);       //compund union for 5 sets
-	Sets sets_intersection(Sets, Sets);                      //compute intersection
-	Sets compound_intersection(Sets A, Sets B, Sets C);             //compound intersection For 3 Arguments
-	Sets compound_intersection(Sets, Sets, Sets, Sets, Sets);       //compound intersection For 5 Arguments
-	Sets sets_difference(Sets, Sets);                          //compute differnce between two sets
-	void get_set_elements(); //for inputting Set elements
-	void show_set_elements(); // to print set elements
-	void Universal(); //universal set
-	void Sort(); //to sort sets into ascending order
-	void show(); //to print result
+class Converter {
+protected:
+	int arr[20];
+	int num;
+	char brr[20];
 };
-void main()              //main function
+
+class binary : public Converter {
+public:
+	void BinarytoDecimal();
+	void DecimaltoBinary();
+};
+
+class octal : public Converter {
+public:
+	void OctaltoDecimal();
+	void DecimaltoOctal();
+};
+
+class hexadecimal : public Converter {
+public:
+	void HexaDecimalToDecimal();
+	void DecimalToHexaDecimal();
+};
+
+class Menu {
+public:
+	void showMenu();
+};
+
+
+void Menu::showMenu()
 {
-	system("COLOR 3F"); //background colour
-	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
-	cout << "\nYou May Have To Enter Elements For 5 Sets A,B,C,D,E in order to proceed\n";                 //input method selection
-	cout << "\nPlease Select the Input Method\n\n1. Enter Elements Yourself\n2. Use Random Numbers." << endl;
-	cout << "\nChoice: ";
-	cin >> choice;
-	cout << "---------------------------------------------------------------------------" << endl;
-	Sets S1, S2, S3, S4, S5, S6, S7;         //creating 7 objects of Sets Class
-	S1.get_set_elements();                   //getting elements on S1,S2,S3,S4,S5
-	S2.get_set_elements();
-	S3.get_set_elements();
-	S4.get_set_elements();
-	S5.get_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	S6.Universal(); //accessing universal set through object
-	system("cls");
-	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
-	cout << "---------------------------------------------------------------------------" << endl;
-	cout << "\n\t\tFollowing Are The Sets Used For Operations:\n\n";                      //to show the sets that have been entered
-	cout << "---------------------------------------------------------------------------" << endl;
-	S1.show_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	S2.show_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	S3.show_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	S4.show_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	S5.show_set_elements();
-	cout << "---------------------------------------------------------------------------" << endl;
-	cout << "\t\t\t";
-	system("pause");
-	cout << "---------------------------------------------------------------------------" << endl;
-	system("cls");                                                                                  //clearing screen
-	cout << "--------------------------Welcome To Sets Program--------------------------" << endl;
-	S7.execute_sets(S1, S2, S3, S4, S5, S6);      //passing S1,S2,S3,S4,S5,S6  as arguments to Func Execute_Sets ....Further Process is implementation is done there
-	cout << "\t\t\t";
-	system("pause");
-	cout << "---------------------------------------------------------------------------" << endl;
-}
+int ch; 
+cout << "\n\nPlease Select From Following\n\n1.\tDecimal To Binary Conversion\n2.\tBinary To Decimal Conversion"
+<< "\n3.\tDecimal To Octal Conversion\n4.\tOctal To Decimal Conversion\n5.\tHexaDecimal To Decimal Conversion" 
+<<"\n6.\tDecimal To HexaDecimal Conversion"<< endl;
+cout << "\nWhich operation do you want to perform: ";
+cin >> ch;
+system("cls");
+ switch (ch)
+  {
 
-
-
-
-
-
-//Function Definitions
-
-
-void Sets::show_Menu()          //shows menu
-{
-	cout << "---------------------------------\nImplementation Of Question 1:\n---------------------------------\n\n";
-	cout << "1.\tA U B\n";
-	cout << "2.\tA N B\n";
-	cout << "3.\tA - B\n";
-	cout << "4.\tB - A\n";
-	cout << "5.\tA'\n";
-	cout << "6.\tB'\n";
-	cout << "\n---------------------------------\nImplementation Of Question 2:\n---------------------------------\n\n";
-	cout << "7.\tA1 U A2 N A3\n";
-	cout << "8.\tA1 N A2 U A3\n";
-	cout << "9.\tA1 U A2 U A3 U A4 U A5\n";
-	cout << "10.\tA1 N A2 N A3 N A4 N A5\n";
-	cout << "\n---------------------------------\nImplementation Of Question 3:\n---------------------------------\n\n";
-	cout << "11.\tA U (B N C)\n";
-	cout << "12.\t(A U B ) N C\n";
-	cout << "13.\tA N (B U C)\n";
-	cout << "14.\t(A N B ) U C\n";
-	cout << "15.\tA N (B N C)\n";
-	cout << "16.\t(A U (B U C)\n";
-	cout << "\n\nSelect Your Choice: ";
-	cin >> h;
-	system("CLS");
-}
-
-
-
-void Sets::execute_sets(Sets A, Sets B, Sets C, Sets D, Sets E, Sets U)             //The Actual Implementation Of The Program Starts Here
-{
-	Sets R, R2;
-	while (G == 'y')
+	case 1:
 	{
-		show_Menu();
-		switch (h)
+		binary bn;
+		cout << "\n\t******Decimal To Binary******" << endl;
+
+		bn.DecimaltoBinary();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+
+	case 2:
+	{
+		binary bn;
+		cout << "\n\t******Binary To Decimal******" << endl;
+
+		bn.BinarytoDecimal();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+
+	case 3:
+	{
+		octal oc;
+		cout << "\n\t******Decimal To Octal******" << endl;
+
+		oc.DecimaltoOctal();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+
+	case 4:
+	{
+		octal oc;
+		cout << "\n\t******Octal To Decimal******" << endl;
+
+		oc.OctaltoDecimal();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+
+	case 5:
+	{
+		hexadecimal hx;
+		cout << "\n\t******HexaDecimal To Decimal******" << endl;
+
+		hx.HexaDecimalToDecimal();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+    
+	case 6:
+	{
+		hexadecimal hx;
+		cout << "\n\t******Decimal To HexaDecimal******" << endl;
+
+		hx.DecimalToHexaDecimal();
+
+		cout << "\n\n";
+		system("pause");
+		system("cls");
+	}
+	break;
+
+
+	default:
+		cout << "Invalid Choice!!!";
+  }
+}
+
+void hexadecimal::DecimalToHexaDecimal()
+{
+	cout << "Please Enter A Decimal Number i.e. (43456): " << endl;
+	cin >> num;
+
+	int i = 0, count = 0;
+
+	do
+	{
+		arr[i] = num % 16;
+		num = num / 16;
+		count++;
+		i++;
+	} while (num > 0);
+
+
+	cout << "Converted Number in HexaDecimal / Base 16: (";
+
+	for (int i = count - 1;i >= 0;i--)
+	{
+		switch (arr[i])
 		{
-		case 1:    //performing union
-		{
-			R = sets_union(A, B);
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A U B :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort();  // sorting of set to display elements in ascending order
-			R.show(); //printing the set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+		case 0:
+			brr[i] = '0';
+			break;
+
+		case 1:
+			brr[i] = '1';
+			break;
 
 		case 2:
-		{
-			R = sets_intersection(A, B); //performing intersection 
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A N B :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort(); //function call to sort set
-			R.show();//printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '2';
+			break;
 
 		case 3:
-		{
-			R = sets_difference(A, B); //subtracting one set from the other (A-B)
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A - B :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort(); //sorting to ascending order
-			R.show();//printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '3';
+			break;
 
 		case 4:
-		{
-			R = sets_difference(B, A); //subtracting one set from the other (B-A)
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "B - A :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort(); //sorting set
-			R.show();//print
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '4';
+			break;
 
 		case 5:
-		{
-			R = sets_difference(U, A); //subtracting set from universal set (U-A)
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A' :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort(); //sorting set
-			R.show();//print
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '5';
+			break;
 
 		case 6:
-		{
-			R = sets_difference(U, B);//subtracting set from universal set (U-B)
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "B' :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort();// sorting set
-			R.show();//print
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-
-		break;
+			brr[i] = '6';
+			break;
 
 		case 7:
-		{
-			R = sets_union(A, B);// assigning set of union of A and B to R 
-			R2 = sets_intersection(R, C);// assigning set of intersection of R and C to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 U A2 N A3 :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '7';
+			break;
 
 		case 8:
-		{
-			R = sets_intersection(A, B);// assigning set of intersection of A and B to result
-			R2 = sets_union(R, C);// assigning set of union of R and C to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 N A2 U A3 :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = '8';
+			break;
 
 		case 9:
-		{
-			R = compound_union(A, B, C, D, E); // result of union of 5 sets assigned to R
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 U A2 U A3 U A4 U A5 :\n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort();//sorting set
-			R.show();// printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-
-		}
-		break;
+			brr[i] = '9';
+			break;
 
 		case 10:
-		{
-			R = compound_intersection(A, B, C, D, E);//// result of intersection of 5 sets assigned to R 
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A1 N A2 N A3 N A4 N A5 : \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R.Sort();//sorting set
-			R.show();//printing result
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = 'A';
+			break;
 
 		case 11:
-		{
-			R = sets_intersection(B, C); // result of intersection of B and C  assigned to R
-			R2 = sets_union(A, R); //result of union of A and R assigned to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A U (B N C): \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
-		case 12:
-		{
-			R = sets_union(A, B); //result of union of A and B assigned to R
-			R2 = sets_intersection(R, C); //result of intersection of R and C assigned to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "(A U B ) N C: \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
-		case 13:
-		{
-			R = sets_union(B, C); //result of union of B and C assigned to R
-			R2 = sets_intersection(A, R); //result of intersection of R and A assigned to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A N (B U C): \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();// sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
-		case 14:
-		{
-			R = sets_intersection(A, B);//result of intersection of A and B assigned to R
-			R2 = sets_union(R, C);//result of intersection of R and C assigned to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "(A N B ) U C: \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
-		case 15:
-		{
-			R = compound_intersection(A, B, C);//result for compound intersection of A, B and C assigned to R
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A N (B N C): \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
-		case 16:
-		{
-			R = sets_union(B, C); //result of union of B and C assigned to R
-			R2 = sets_union(A, R);//result of union of A and R assigned to R2
-			cout << "---------------------------------------------------------------------------" << endl;
-			cout << "A U (B U C): \n";
-			cout << "---------------------------------------------------------------------------" << endl;
-			R2.Sort();//sorting set
-			R2.show();//printing set
-			cout << "---------------------------------------------------------------------------" << endl;
-		}
-		break;
+			brr[i] = 'B';
+			break;
 
+		case 12:
+			brr[i] = 'C';
+			break;
+
+		case 13:
+			brr[i] = 'D';
+			break;
+
+		case 14:
+			brr[i] = 'E';
+			break;
+
+		case 15:
+			brr[i] = 'F';
+			break;
 
 		default:
-			cout << "---------------------------------------------------------------------------" << endl; //check to ensure right option is entered
-			cout << "\aYou entered wrong key\n";
-			cout << "---------------------------------------------------------------------------" << endl;
+			cout << "Invalid Choice!!!" << endl;
+		}
+
+		cout << brr[i];
+	}
+	cout << ")16\n";
+}
+
+void hexadecimal::HexaDecimalToDecimal()
+{
+
+	cout << "Please Enter A HexaDecimal Number 5- digits only i.e. (2A5C8): " << endl;
+	for (int i = 4;i >= 0;i--)
+	{
+		cin >> brr[i];
+	}
+
+	int sum = 0;
+	for (int i = 4;i >= 0;i--)
+	{
+		switch (brr[i])
+		{
+		case '0':
+			arr[i] = 0;
 			break;
+		case '1':
+			arr[i] = 1;
+			break;
+		case '2':
+			arr[i] = 2;
+			break;
+		case '3':
+			arr[i] = 3;
+			break;
+		case '4':
+			arr[i] = 4;
+			break;
+		case '5':
+			arr[i] = 5;
+			break;
+		case '6':
+			arr[i] = 6;
+			break;
+		case '7':
+			arr[i] = 7;
+			break;
+		case '8':
+			arr[i] = 8;
+			break;
+		case '9':
+			arr[i] = 9;
+			break;
+
+		case 'A':
+		case 'a':
+			arr[i] = 10;
+			break;
+
+		case 'B':
+		case 'b':
+			arr[i] = 11;
+			break;
+
+		case 'C':
+		case 'c':
+			arr[i] = 12;
+			break;
+
+		case 'D':
+		case 'd':
+			arr[i] = 13;
+			break;
+
+		case 'E':
+		case 'e':
+			arr[i] = 14;
+			break;
+
+		case 'F':
+		case 'f':
+			arr[i] = 15;
+			break;
+
+		default:
+			cout << "Invalid Choice!!!" << endl;
 		}
-		cout << "\nPlease enter 'y' for check again or 'n' for stop: " << endl;                              //check to either perform another function or exit
-		cout << "---------------------------------------------------------------------------" << endl;
-		cin >> G;
+
+		arr[i] = arr[i] * pow(16, i);
 	}
+
+	cout << "The Converted Number in Decimal / Base 10 is : " << endl;
+	for (int i = 4;i >= 0;i--)
+	{
+		sum += arr[i];
+		cout << arr[i];
+		if (i>0)
+			cout << "+";
+	}
+	cout << "\n= (" << sum << ")10" << endl;
 
 }
 
 
-
-Sets Sets::sets_union(Sets A, Sets B)                  //compute Union
+void octal::OctaltoDecimal()
 {
-	l = 0;
-	Sets temp;
-	//compute union
-	for (i = 0; i<A.sel; i++)
+	cout << "Please Enter An Octal Number 5- digits only i.e. (4 5 6 2 3 ): " << endl;
+	for (int i = 4;i >= 0;i--)
 	{
-		temp.Arr[i] = A.Arr[i];
-		l++;
+		cin >> arr[i];
 	}
 
-	int e = l;
-
-	for (i = 0; i<B.sel; i++)
+	int sum = 0;
+	for (int i = 4;i >= 0;i--)
 	{
-		int found = 0;
-		for (int j = 0; j<e; j++)
-		{
-			if (B.Arr[i] == temp.Arr[j])
-			{
-				found = 1;
-				break;
-			}
-		}
-		if (found == 0)
-		{
-			temp.Arr[l] = B.Arr[i];
-			l++;
-		}
-		temp.sel = l;
+		arr[i] = arr[i] * pow(8, i);
 	}
-	return temp;
+
+	cout << "The Converted Number in Decimal / Base 10 is : " << endl;
+	for (int i = 4;i >= 0;i--)
+	{
+		sum += arr[i];
+		cout << arr[i];
+		if (i>0)
+			cout << "+";
+	}
+	cout << "\n= (" << sum << " )10" << endl;
 
 }
 
-
-
-
-
-Sets Sets::compound_union(Sets A, Sets B, Sets C, Sets D, Sets E)           //function to compute compound union
+void octal::DecimaltoOctal()
 {
-	Sets a, b, c, temp;
-	a = sets_union(A, B);
-	b = sets_union(C, D);
-	c = sets_union(a, b);
-	temp = sets_union(c, E);
-	return temp;
+	cout << "Please Enter A Decimal Number i.e. (234): " << endl;
+	cin >> num;
+
+	int i = 0, count = 0;
+
+	do
+	{
+		arr[i] = num % 8;
+		num = num / 8;
+		count++;
+		i++;
+	} while (num > 0);
+
+
+	cout << "Converted Number in Octal / Base 8: (";
+	for (int i = count - 1;i >= 0;i--)
+	{
+		cout << arr[i];
+	}
+	cout << ")8\n";
+
+
 }
 
-
-Sets Sets::sets_intersection(Sets A, Sets B)          //compute Intersection
+void binary::DecimaltoBinary()
 {
-	l = 0;
-	Sets obj;
-	for (i = 0; i<A.sel; i++)
+
+	cout << "Please Enter A Decimal Number i.e. (234): " << endl;
+	cin >> num;
+
+	int i = 0, count = 0;
+
+	do
 	{
-		for (j = 0; j<B.sel; j++)
-		{
-			if (A.Arr[i] == B.Arr[j])
-			{
-				B.Arr[j] = 0;
-				obj.Arr[l] = A.Arr[i];
-				l++;
-			}
-		}
-	}
-	return obj;
-}
+		arr[i] = num % 2;
+		num = num / 2;
+		count++;
+		i++;
+	} while (num > 0);
 
 
-
-
-Sets Sets::compound_intersection(Sets A, Sets B, Sets C)      //function to computecompound  intersection with three Arguments
-{
-	l = 0;
-	Sets temp;
-	for (i = 0; i<A.sel; i++)
+	cout << "Converted Number in Binary / Base 2: (";
+	for (int i = count - 1;i >= 0;i--)
 	{
-		for (j = 0; j < B.sel; j++)
-		{
-			for (int k = 0; k < C.sel; k++)
-			{
-				if (A.Arr[i] == B.Arr[j] && B.Arr[j] == C.Arr[k])
-				{
-					B.Arr[j] = 0;
-					temp.Arr[l] = A.Arr[i];
-					l++;
-				}
-
-			}
-		}
-
+		cout << arr[i];
 	}
-	return temp;
-}
-
-
-
-Sets Sets::compound_intersection(Sets A, Sets B, Sets C, Sets D, Sets E)      //function to compute compound  intersection with three Arguments
-{
-	l = 0;
-	Sets temp;
-
-	for (i = 0; i<A.sel; i++)
-	{
-		for (j = 0; j < B.sel; j++)
-		{
-			for (int k = 0; k < C.sel; k++)
-			{
-				for (int x = 0; x < D.sel; x++)
-				{
-					for (int p = 0; p < E.sel; p++)
-					{
-						if (A.Arr[i] == B.Arr[j] && B.Arr[j] == C.Arr[k] && C.Arr[k] == D.Arr[x] && D.Arr[x] == E.Arr[p])
-						{
-							B.Arr[j] = 0;
-							temp.Arr[l] = A.Arr[i];
-							l++;
-						}
-					}
-				}
-			}
-		}
-
-	}
-	return temp;
-}
-
-
-
-Sets Sets::sets_difference(Sets A, Sets B)          //compute difference
-{
-	l = 0;
-	Sets temp;
-	for (i = 0; i < A.sel; i++)
-	{
-		int found = 0;
-		for (j = 0; j < B.sel; j++)
-		{
-
-			if (A.Arr[i] == B.Arr[j])
-			{
-				found = 1;
-				break;
-			}
-		}
-		if (found == 0)
-		{
-			temp.Arr[l] = A.Arr[i];
-			l++;
-		}
-	}
-	for (i = 0; i < B.sel; i++)
-	{
-		int found = 0;
-		for (j = 0; j < A.sel; j++)
-		{
-			if (B.Arr[i] == A.Arr[j])
-			{
-				found = 1;
-				break;
-			}
-		}
-
-		if (found == 0)
-		{
-			temp.Arr[l] = B.Arr[i];
-			l++;
-		}
-	}
-	return temp;
-}
-
-
-
-void Sets::get_set_elements()                                                                //function to get Elements
-{
-	char dummy;                        //for storing commas entered during input
-	srand(time(NULL));                                                                     //  using the time seed from srand explanation
-	cout << "Please enter number of elements For Set " << set_count << " : ";              //Getting input for  sets element size.
-	cin >> sel;                                                                            //Storing size in variable.
-
-	if (choice == 1)
-	{
-		cout << "(Enter The Elements Of the Set seprated by Commas like this  1,2,3,4,5 ";
-		cout << "Please enter Set Elements For Set " << set_count << ": ";
-		for (i = 0;i < sel;i++)
-		{
-			cin >> Arr[i];
-			if (i<sel - 1)
-				cin >> dummy;
-
-		}
-		cout << endl;
-	}
-
-	else if (choice == 2)
-	{
-		for (i = 0;i < sel;i++)
-		{
-			Arr[i] = (rand() % 10 + i);
-		}
-	}
-
-	else
-	{
-		cout << "Invalid Choice!!...Try Again Plzz..\n";
-		exit(0);
-	}
-	++set_count;
-}
-
-void Sets::show_set_elements()         //function to show wlwmwnts
-{
-	cout << "Elements of the Set " << set_count << " : { ";
-	for (i = 0;i<sel;i++) 	                                 \
-	{
-		cout << Arr[i];
-		if (i<sel - 1)
-		{
-			cout << " , ";
-		}
-	}
-	cout << " }";
-	cout << "\n\n";
-	++set_count;
+	cout << ")2\n";
 }
 
 
 
 
-void Sets::Universal()    //universal Array
+void binary::BinarytoDecimal()
 {
-
-	for (i = 0;i < 21;i++)
+	cout << "Please Enter A Binary Number 5- digits only i.e. (1 1 0 1 0 ): " << endl;
+	for (int i = 4;i >= 0;i--)
 	{
-		Arr[i] = i;
+		cin >> arr[i];
 	}
-	sel = 20;
+
+	int sum = 0;
+	for (int i = 4;i >= 0;i--)
+	{
+		arr[i] = arr[i] * pow(2, i);
+	}
+
+	cout << "The Converted Number in Decimal / Base 10 is : " << endl;
+	for (int i = 4;i >= 0;i--)
+	{
+		sum += arr[i];
+		cout << arr[i];
+		if (i>0)
+			cout << "+";
+	}
+	cout << "\n= (" << sum << " )10" << endl;
 }
 
 
 
-
-void  Sets::Sort()                                //function for sorting the array
+void main()
 {
-	int swap;
-	for (i = 0; i < (sel - 1); i++)
-	{
-		for (j = 0; j < sel - i - 1; j++)
-		{
-			if (Arr[j] > Arr[j + 1])
-			{
-				swap = Arr[j];
-				Arr[j] = Arr[j + 1];
-				Arr[j + 1] = swap;
-			}
-		}
-	}
-}
-
-
-
-void Sets::show()           //show function
-{
-	cout << "{ ";
-	for (i = 0; i < l; i++)
-	{
-
-		cout << Arr[i];
-		if (i <l - 1)
-		{
-			cout << " , ";
-		}
-	}
-	cout << " }" << endl;
+	system("color 3F");
+	cout << "\n\n\nWelcome To Number System Converter (OOP Project)" << endl;
+	cout << "\n\nMade By Hussain Khan\n\n" << endl;
+	Menu m;
+	m.showMenu();
+	cout << "\n\n\n\n\n\n\n\n\n\t\t\tThanks For Using Converter..... ";
+	Sleep(5000);
 }
